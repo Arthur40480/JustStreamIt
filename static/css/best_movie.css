@@ -1,0 +1,47 @@
+/* SECTION DU MEILLEUR FILM */
+.best-movie-container {
+    background-image: url("../../template/img/pexels-elijah-o\'donnell-3473569.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .best-movie-container{
+    display: flex;
+    justify-content: center;
+    padding: 150px 0px 150px 0px;
+  }
+
+  .best-movie-container h2 {
+    margin: 0;
+    padding-bottom: 30px;
+    font-size: 40px;
+  }
+
+  .best-movie-container button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 15px;
+    color: #000F16;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .best-movie-container button:hover {
+    color: white;
+    background-color: #000F16;
+  }
+
+  .best-movie-button-play {
+    margin-right: 20px;
+  }
+
+  .best-movie-container i {
+    margin-right: 5px;
+  }
+
+  .best-movie-img {
+    padding-left: 60px;
+  }
