@@ -9,6 +9,7 @@
 
     <link href="../static/css/header.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/best_movie.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/modal.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -27,14 +28,42 @@
     <!-- Section du meilleur film -->
     <section class="best-movie-container">
         <article>
-            <h2 class="best-movie-title" id="best-movie-title">Titre du film</h2>
+            <h2 class="best-movie-title" id="best-movie-title"></h2>
             <button class="best-movie-button-play"><i class="fa-solid fa-play"></i>Play</button>
             <button class="best-movie-button-info"><i class="fa-solid fa-circle-info"></i>Plus d'infos</button>
-            <p class="best-movie-description">Un jeune violoniste atteint de leucémie apporte espoir et vie dans un hôpital russe désolé pour enfants.</p>
+            <p class="best-movie-description"></p>
         </article>
         <img class="best-movie-img" alt="movie cover" src="" />
     </section>
 
+    <!-- Fenêtre modale -->
+    <div class="modal">
+        <header class="modal-header">
+            <h2 class="modal-title">Titre</h2>
+            <button class="modal-button-play"><i class="fa-solid fa-play"></i>Play</button>
+            <button class="modal-button-close"><i class="fa-solid fa-xmark"></i></button>
+        </header>
+        <section class="modal-section">
+            <div class="modal-div-infos">
+                <strong>Type : </strong><p class="modal-genre"></p><br>
+                <strong>Durée :</strong><p class="modal-duration"></p><br><br>
+                <strong>Pays d'origine :</strong><p class="modal-country"></p><br>
+                <strong>Année de sortie : </strong><p class="modal-release-year"></p><br>
+                <strong>Évaluation : </strong><p class="modal-rated"></p><br>
+                <strong>Score lmdb : </strong><p class="modal-lmdb"></p><br>
+                <strong>Résultat au Box Office : </strong><p class="modal-box-office"></p><br><br>
+                <strong>Réalisateur : </strong><p class="modal-director"></p><br>
+                <strong>Acteurs : </strong><p class="modal-actor"></p><br><br>
+                <strong>Déscription : </strong><p class="modal-description"></p><br>
+            </div>
+            <div class="modal-div-img">
+                <img class="modal-img" alt="illustration du film" src="" />
+            </div>
+        </section>
+
+    </div>
+    
+    <!-- SCRIPTS -->
     <script src="../static/js/script.js"></script>
     <script src="https://kit.fontawesome.com/6d43f5af63.js" crossorigin="anonymous"></script>
 </body>
