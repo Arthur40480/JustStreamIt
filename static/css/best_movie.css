@@ -1,14 +1,12 @@
 /* SECTION DU MEILLEUR FILM */
-.best-movie-container {
-    background-image: url("../../template/img/pexels-elijah-o\'donnell-3473569.jpg");
-    background-size: cover;
-    background-position: center;
-  }
 
-.best-movie-container{
+.best-movie-container {
   display: flex;
   justify-content: center;
-  padding: 150px 0px 150px 0px;
+  padding: 100px 0px 60px 0px;
+  background-image: url("../../template/img/pexels-elijah-o\'donnell-3473569.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .best-movie-container article {
