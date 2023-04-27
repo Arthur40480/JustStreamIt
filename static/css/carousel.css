@@ -1,0 +1,108 @@
+/* SECTION DES CAROUSEL */
+
+.section-carousel-movie {
+    padding-top: 20px;
+    background: linear-gradient(#0B0C10, #000F16);
+}
+
+.category-title {
+    padding: 0 0 20px 30px;
+    font-size: 35px;
+    text-transform: uppercase;
+    
+}
+
+.container-carousel-movie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-carousel-movie button {
+    border: none;
+    border-radius: 2px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.right-button {
+    margin-left: 20px;
+}
+
+.left-button {
+    margin-right: 10px;
+}
+
+.container-carousel-movie button:hover {
+    color: white;
+    background-color: #cfaf7b;
+}
+
+.movie-container {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    width: 60%;
+}
+
+.container-button-img-movie {
+    position: relative;
+    margin: 15px;
+}
+
+.category-movie-title {
+    opacity: 0;
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    font-size: 17px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.container-button-img-movie button {
+    padding: 5px;
+    font-size: 15px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.container-button-img-movie:hover img {
+    opacity: 0.4;
+}
+
+.container-button-img-movie:hover p{
+    opacity: 1;    
+}
+
+.container-button-img-movie:hover button {
+    opacity: 1;    
+}
+
+.container-button-img-movie button i {
+    margin-right: 5px;
+}
+
+.category-movie-button-info {
+    position: absolute;
+    left: 60px;
+    top: 120px;
+    z-index: 1;
+}
+
+.category-movie-button-play {
+    position: absolute;
+    right: 60px;
+    top: 120px;
+    z-index: 1;
+}
+
+.img-carousel {
+    width: 256px;
+    height: 300px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #323A42;
+    transition: all 0.3s;
+}
+

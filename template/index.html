@@ -9,7 +9,7 @@
 
     <link href="../static/css/header.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/best_movie.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/top_rated_movie.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/carousel.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/modal.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -22,7 +22,7 @@
         <h1 class="header-title">JustStreamIt</h1>
         <nav class="header-menu">       
             <a href="index.html">Accueil</a>
-            <a href="index.html">Catégories</a>
+            <a href="#category">Catégories</a>
         </nav>
     </header>
 
@@ -37,25 +37,13 @@
         <img class="best-movie-img" alt="movie cover" src="" />
     </section>
 
-    <!-- Section des films les mieux notés -->
-    <section class="top-rated-movie">
-        <h2>Titre de la catégorie</h2>
-        <div class="top-rated-container">
-            <button class="left-button">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-            <div class="movie-container"></div>
-            <button class="right-button">
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
-        </div>
-    </section>
-
+    <!-- Section qui contient les carousels des différentes catégories -->
+    <div class="carousel-container" id="category"></div>
 
     <!-- Fenêtre modale -->
-    <div class="modal">
+    <div class="modal" id="modal">
         <header class="modal-header">
-            <h2 class="modal-title">Titre</h2>
+            <h2 class="modal-title"></h2>
             <button class="modal-button-play"><i class="fa-solid fa-play"></i>Play</button>
             <button class="modal-button-close"><i class="fa-solid fa-xmark"></i></button>
         </header>
@@ -76,7 +64,6 @@
                 <img class="modal-img" alt="illustration du film" src="" />
             </div>
         </section>
-
     </div>
     
     <!-- SCRIPTS -->
