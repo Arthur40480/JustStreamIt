@@ -10,7 +10,6 @@ const movieTitleElt = document.getElementsByClassName("best-movie-title")[0];
 const movieDescriptionElt = document.getElementsByClassName("best-movie-description")[0];
 const movieButtonModalElt = document.getElementsByClassName("best-movie-button-info")[0];
 
-
 /* Element du DOM contenant les carousel des différentes catégories */
 const carouselContainerElt = document.getElementsByClassName("carousel-container")[0];
 
@@ -30,6 +29,7 @@ const modalImgElt = document.getElementsByClassName("modal-img")[0];
 
 /* Fonction pour récupérer les données du meilleur film */
 async function fetchBestMovie() {
+    
     let bestId = []
 
     await fetch(mainUrl + "?sort_by=-imdb_score")
@@ -45,7 +45,7 @@ async function fetchBestMovie() {
                     movieTitleElt.innerHTML = data["title"];
                     movieDescriptionElt.innerHTML = data["description"];
                     movieButtonModalElt.addEventListener("click", function() {
-                        openModal(bestId[0])
+                    openModal(bestId[0])
                     }) 
                 })
         })
@@ -65,13 +65,25 @@ function fetchDataMovieForModal(id) {
             modalDurationElt.innerHTML= " " + data["duration"] + "min"; 
             modalCountryElt.innerHTML = " " + data["countries"]; 
             modalYearElt.innerHTML = " " + data["year"];
-            modalRatedElt.innerHTML = " " + data["rated"]; 
             modalLmdbElt.innerHTML = " " + data["imdb_score"] + " / 10";
-            modalBoxOfficeElt.innerHTML = " " + data["worldwide_gross_income"]; 
             modalDirectorElt.innerHTML = " " + data["directors"];
             modalActorElt.innerHTML = " " + data["actors"];
             modalDescriptionElt.innerHTML = " " + data["description"];
             modalImgElt.src = data["image_url"];
+
+            if(data["rated"] == "Not rated or unkown rating") {
+                modalRatedElt.innerHTML = " " + "Evaluation inconnue";
+            }
+            else {
+                modalRatedElt.innerHTML = " " + data["rated"];
+            }
+
+            if (data["worldwide_gross_income"] == null) {
+                modalBoxOfficeElt.innerHTML = " " + "Résultat inconnue";
+            }
+            else {
+                modalBoxOfficeElt.innerHTML = " " + data["worldwide_gross_income"];
+            }
         })
 }
 
@@ -81,26 +93,27 @@ function fetchDataMovieForModal(id) {
  */
 async function fetchMovieCategoryData(category) {
 
-    let movieCategory = []
+    let dataCategoryMovie = await fetch(categoryUrl + category);
+    let results = await dataCategoryMovie.json();
+    let listMovie = results["results"];
+    let nextPage = results["next"];
+    
+    if (listMovie.length == 7) {
+        return movie;
+    } 
+    
+    let dataCategoryMovieSecondPage = await fetch(nextPage);
+    let secondPageResults = await dataCategoryMovieSecondPage.json();
+    let secondPageListMovie = secondPageResults["results"];
+    let nbrMovie = listMovie.length;
 
-    await fetch(categoryUrl + category)
-        .then(response => response.json())
-        .then(data => {
-            for(i = 0; i < data["results"].length; i++) {
-                movieCategory.push(data["results"][i]);
-            }
-            if(movieCategory.length < 7) {
-                fetch(data["next"])
-                    .then(response => response.json())
-                    .then(data => {
-                        const nbrOfMovies = movieCategory.length;
-                        for(i = nbrOfMovies; i < 7; i++) {
-                            movieCategory.push(data["results"][(i - nbrOfMovies)]);
-                        }
-                    })
-            }
-        })
-    return movieCategory;
+    for(i = nbrMovie; i < 7; i++) {
+        listMovie.push(secondPageListMovie[i - nbrMovie]);
+        console.log(listMovie)
+    }
+
+    return listMovie;
+    
 }
 
 /**
@@ -110,7 +123,7 @@ async function fetchMovieCategoryData(category) {
 async function buildCarousel(category) {
 
     const listMovie = await fetchMovieCategoryData(category)
-
+    
     const categoryContainerElt = document.createElement("section");
     categoryContainerElt.classList.add("section-carousel-movie");
     carouselContainerElt.append(categoryContainerElt);
@@ -151,7 +164,7 @@ function buildMovieCarousel(listMovie, containerElt) {
         
         const id = movie["id"];
         const title = movie["title"];
-
+        
         const containerMovieElt = document.createElement("div");
         containerMovieElt.classList.add("container-button-img-movie");
         
@@ -199,4 +212,3 @@ function openModal(id) {
 
 fetchBestMovie()
 buildCarousel("horror")
-buildCarousel("action")
