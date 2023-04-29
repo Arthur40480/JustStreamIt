@@ -89,11 +89,11 @@ function fetchDataMovieForModal(id) {
 
 /**
  * Récupération des 7 meilleurs films d'une catégorie
- * @param {string} category 
+ * @param {string} url
  */
-async function fetchMovieCategoryData(category) {
+async function fetchMovieCategoryData(url) {
 
-    let dataCategoryMovie = await fetch(categoryUrl + category);
+    let dataCategoryMovie = await fetch(url);
     let results = await dataCategoryMovie.json();
     let listMovie = results["results"];
     let nextPage = results["next"];
@@ -109,7 +109,6 @@ async function fetchMovieCategoryData(category) {
 
     for(i = nbrMovie; i < 7; i++) {
         listMovie.push(secondPageListMovie[i - nbrMovie]);
-        console.log(listMovie)
     }
 
     return listMovie;
@@ -118,11 +117,12 @@ async function fetchMovieCategoryData(category) {
 
 /**
  * Création de la section qui accueillera le carousel dans le DOM
+ * @param {string} url
  * @param {String} category 
  */
-async function buildCarousel(category) {
+async function buildCarousel(url, category) {
 
-    const listMovie = await fetchMovieCategoryData(category)
+    const listMovie = await fetchMovieCategoryData(url)
     
     const categoryContainerElt = document.createElement("section");
     categoryContainerElt.classList.add("section-carousel-movie");
@@ -141,6 +141,9 @@ async function buildCarousel(category) {
     buttonLeftElt.classList.add("left-button");
     buttonLeftElt.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
     carouselElt.append(buttonLeftElt);
+    buttonLeftElt.addEventListener("click", function () {
+        movieContainerElt.scrollLeft -= 285;
+    })
 
     const movieContainerElt = document.createElement("div");
     movieContainerElt.classList.add("movie-container");
@@ -152,6 +155,9 @@ async function buildCarousel(category) {
     buttonRightElt.classList.add("right-button");
     buttonRightElt.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
     carouselElt.append(buttonRightElt);
+    buttonRightElt.addEventListener("click", function () {
+        movieContainerElt.scrollLeft += 285;
+    })
 }
 
 /**
@@ -210,5 +216,12 @@ function openModal(id) {
     }
 }
 
-fetchBestMovie()
-buildCarousel("horror")
+
+
+buildCarousel(mainUrl + "?sort_by=-imdb_score", "Les mieux notés");
+buildCarousel(categoryUrl + "horror", "horror");
+buildCarousel(categoryUrl + "music", "music");
+buildCarousel(categoryUrl + "film-noir", "film-noir");
+
+fetchBestMovie();
+
