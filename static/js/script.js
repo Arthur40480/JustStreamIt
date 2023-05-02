@@ -10,7 +10,7 @@ const movieTitleElt = document.getElementsByClassName("best-movie-title")[0];
 const movieDescriptionElt = document.getElementsByClassName("best-movie-description")[0];
 const movieButtonModalElt = document.getElementsByClassName("best-movie-button-info")[0];
 
-/* Element du DOM contenant les carousel des différentes catégories */
+/* Element du DOM contenant les carousels des différentes catégories */
 const carouselContainerElt = document.getElementsByClassName("carousel-container")[0];
 
 /* Element du DOM de la fenêtre modale */
@@ -45,7 +45,7 @@ async function fetchBestMovie() {
                     movieTitleElt.innerHTML = data["title"];
                     movieDescriptionElt.innerHTML = data["description"];
                     movieButtonModalElt.addEventListener("click", function() {
-                    openModal(bestId[0])
+                    openModal(bestId[0]);
                     }) 
                 })
         })
@@ -110,9 +110,7 @@ async function fetchMovieCategoryData(url) {
     for(i = nbrMovie; i < 7; i++) {
         listMovie.push(secondPageListMovie[i - nbrMovie]);
     }
-
-    return listMovie;
-    
+    return listMovie;   
 }
 
 /**
@@ -120,10 +118,8 @@ async function fetchMovieCategoryData(url) {
  * @param {string} url
  * @param {String} category 
  */
-async function buildCarousel(url, category) {
+function buildCarousel(url, category) {
 
-    const listMovie = await fetchMovieCategoryData(url)
-    
     const categoryContainerElt = document.createElement("section");
     categoryContainerElt.classList.add("section-carousel-movie");
     carouselContainerElt.append(categoryContainerElt);
@@ -149,7 +145,7 @@ async function buildCarousel(url, category) {
     movieContainerElt.classList.add("movie-container");
     carouselElt.append(movieContainerElt);
 
-    buildMovieCarousel(listMovie, movieContainerElt);
+    buildMovieCarousel(movieContainerElt, url);
     
     const buttonRightElt = document.createElement("button");
     buttonRightElt.classList.add("right-button");
@@ -165,7 +161,10 @@ async function buildCarousel(url, category) {
  * @param {String} category 
  * @param {Object} container 
  */
-function buildMovieCarousel(listMovie, containerElt) {
+async function buildMovieCarousel(containerElt, url) {
+    
+    const listMovie = await fetchMovieCategoryData(url)
+
     listMovie.forEach((movie) => {
         
         const id = movie["id"];
@@ -190,11 +189,11 @@ function buildMovieCarousel(listMovie, containerElt) {
         buttonInfoMovieElt.innerHTML = '<i class="fa-solid fa-circle-info"></i>Info';
 
         buttonInfoMovieElt.addEventListener("click", function() {
-            openModal(id)
+            openModal(id);
         });
         
-        containerMovieElt.append(imgMovieElt, titleMovieElt ,buttonPlayMovieElt, buttonInfoMovieElt)
-        containerElt.append(containerMovieElt)
+        containerMovieElt.append(imgMovieElt, titleMovieElt ,buttonPlayMovieElt, buttonInfoMovieElt);
+        containerElt.append(containerMovieElt);
     });
 }
 
@@ -215,8 +214,6 @@ function openModal(id) {
         modalWindow.style.display = "none";
     }
 }
-
-
 
 buildCarousel(mainUrl + "?sort_by=-imdb_score", "Les mieux notés");
 buildCarousel(categoryUrl + "horror", "horror");
