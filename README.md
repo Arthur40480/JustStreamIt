@@ -41,3 +41,5 @@ pipenv run python manage.py runserver
 ### Utilisation :question::question::question:
 
 Pour accéder à la page, ouvrez le fichier index.html dans n'importe quel navigateur Web.
+
+Documentation de l'API [ICI](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR)
